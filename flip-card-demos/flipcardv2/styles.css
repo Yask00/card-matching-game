@@ -1,0 +1,42 @@
+body {
+    padding: 50px;
+}
+
+.flip {
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    position: relative;
+}
+
+.flip .card {
+    width: 330px;
+    height: 400px;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: 0.5s;
+    /* without it leaves the front on rotattion */
+    transform-style: preserve-3d;
+    transition: 0.5s;
+}
+/* Initially .back is reversed and on 
+.flipped it rotates the whole card */
+.flip .card.flipped {
+    -webkit-transform: rotatey(-180deg);
+    transform: rotatey(-180deg);
+}
+
+.flip .card .front {
+    position: absolute;
+    z-index: 1;
+}
+.flip .card .back {
+    -webkit-transform: rotatey(-180deg);
+    transform: rotatey(-180deg);
+    position: absolute;
+}
+
+.flip .card .front img,
+.flip .card .back img {
+    border-radius: 10px;
+    width: 330px;
+    height: 400px;
+}
