@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.game-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    min-height: 100vh;
+}
+
+#game {
+    width: 550px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.flipcard {
+    flex: 0 1 130px;
+    height: 160px;
+    perspective: 1000px;
+    margin-bottom: 10px;
+}
+
+.flipcard:hover {
+    cursor: pointer;
+}
+
+.flipcard-inner.flipped {
+    transform: rotateY(-180deg);
+}
+
+.flipcard .flipcard-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.face {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+}
+
+.flipcard .flipcard-inner .flipcard-inner-front img,
+.flipcard .flipcard-inner .flipcard-inner-back img {
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.flipcard .flipcard-inner .flipcard-inner-back {
+    transform: rotateY(-180deg);
+}
+
+.game-overlay {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(135, 206, 250, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-overlay .start {
+    padding: 50px;
+    color: maroon;
+    font-size: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.game-overlay .start:hover {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
