@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 20px;
+}
+
+.flipcard {
+    width: 300px;
+    height: 400px;
+    perspective: 1000px;
+}
+
+.flipcard-inner.flipped {
+    transform: rotateY(-180deg);
+}
+
+.flipcard .flipcard-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.face {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+}
+
+.flipcard .flipcard-inner .flipcard-front img,
+.flipcard .flipcard-inner .flipcard-back img {
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.flipcard .flipcard-inner .flipcard-back {
+    transform: rotateY(-180deg);
+}
