@@ -1,9 +1,7 @@
 /*
   Notes:
-  Every flip card has data-id:number and data-name:string
+  Every flip card has data-id:number
   data-id is to compare two cards and remove their flip listeners
-  data-name is different for every two card pairs, so if one is 
-  ...opened we can check if we are clicking on the same one again
   lockBoard is true while we are checking unmatched cards and wait them to flip again
 */
 
@@ -19,37 +17,38 @@ function flipListener() {
   if (!lockBoard) {
     if (isUnmatchedCardFlipped) {
       // flip second card
-      if (
-        openedCardOne.getAttribute("data-name") ===
-        this.getAttribute("data-name")
-      ) {
+      if (openedCardOne === this) {
+        console.log(openedCardOne, this);
         return; // return if we click on the same first open card
       } else {
         isUnmatchedCardFlipped = false;
         openedCardTwo = this;
 
-        const cardBox = this.querySelector(".flipcard-inner");
+        const cardBox = openedCardTwo.querySelector(".flipcard-inner");
         cardBox.classList.toggle("flipped");
 
-        compareTwoCards(openedCardOne, openedCardTwo);
+        compareTwoCards();
       }
     } else {
       // flip first card
       isUnmatchedCardFlipped = true;
       openedCardOne = this;
 
-      const cardBox = this.querySelector(".flipcard-inner");
+      const cardBox = openedCardOne.querySelector(".flipcard-inner");
       cardBox.classList.toggle("flipped");
     }
   }
 }
 
-const compareTwoCards = (card1, card2) => {
-  if (card1.getAttribute("data-id") === card2.getAttribute("data-id")) {
+const compareTwoCards = () => {
+  if (
+    openedCardOne.getAttribute("data-id") ===
+    openedCardTwo.getAttribute("data-id")
+  ) {
     ++matchedCardsCounter;
 
-    card1.removeEventListener("click", flipListener, false);
-    card2.removeEventListener("click", flipListener, false);
+    openedCardOne.removeEventListener("click", flipListener, false);
+    openedCardTwo.removeEventListener("click", flipListener, false);
 
     setTimeout(() => {
       endGame();
@@ -57,13 +56,13 @@ const compareTwoCards = (card1, card2) => {
   } else {
     lockBoard = true;
     setTimeout(() => {
-      const cardBoxOne = card1.querySelector(".flipcard-inner");
+      const cardBoxOne = openedCardOne.querySelector(".flipcard-inner");
       cardBoxOne.classList.toggle("flipped");
 
-      const cardBoxTwo = card2.querySelector(".flipcard-inner");
+      const cardBoxTwo = openedCardTwo.querySelector(".flipcard-inner");
       cardBoxTwo.classList.toggle("flipped");
       lockBoard = false;
-    }, 2000);
+    }, 1000);
   }
 };
 
@@ -88,6 +87,7 @@ const startGame = () => {
 
 endGame = () => {
   if (matchedCardsCounter === 8) {
+    matchedCardsCounter = 0;
     let flippedCards = Array.from(document.querySelectorAll(".flipcard-inner"));
     flippedCards.forEach((card) => {
       card.classList.remove("flipped");
