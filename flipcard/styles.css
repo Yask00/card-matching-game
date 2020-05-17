@@ -1,0 +1,86 @@
+/* --------------------------------HOVERABLE---------------------------------- */
+/* INITIAL FLIPCARD STATUS */
+.flipcard {
+    position: relative;
+    width: 300px;
+    display: inline-block;
+    margin-right: 20px;
+}
+.flipcard .front,
+.flipcard .back {
+    width: inherit;
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    /* background-size: 100% 100%; */
+    background-position: center !important;
+    height: 400px;
+    border-radius: 10px;
+    display: block;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition-duration: 0.25s;
+    transition-property: transform, opacity;
+}
+.flipcard .front {
+    transform: rotateY(0deg);
+}
+.flipcard .back {
+    position: absolute;
+    opacity: 0;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    transform: rotateY(-180deg);
+}
+/* ACTUAL FLIP ON HOVER  */
+.flipcard:hover .front {
+    transform: rotateY(180deg);
+}
+.flipcard:hover .back {
+    opacity: 1;
+    transform: rotateY(0deg);
+}
+
+/* --------------------------------CLICKABLE---------------------------------- */
+/* INITIAL FLIPCARD STATUS */
+.clickable-flipcard {
+    position: relative;
+    width: 300px;
+    display: inline-block;
+    margin-right: 20px;
+}
+.clickable-flipcard .front,
+.clickable-flipcard .back {
+    width: inherit;
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    /* background-size: 100% 100%; */
+    background-position: center !important;
+    height: 400px;
+    border-radius: 10px;
+    display: block;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition-duration: 0.25s;
+    transition-property: transform, opacity;
+}
+.clickable-flipcard .front {
+    transform: rotateY(0deg);
+}
+.clickable-flipcard .back {
+    position: absolute;
+    opacity: 0;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    transform: rotateY(-180deg);
+}
+
+/* ACTUAL FLIP ON HOVER  */
+.clickable-flipcard.flipped .front {
+    transform: rotateY(180deg);
+}
+.clickable-flipcard.flipped .back {
+    opacity: 1;
+    transform: rotateY(0deg);
+}
